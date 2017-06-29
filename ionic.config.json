@@ -1,5 +1,8 @@
 {
   "name": "timbreo-merlo",
-  "app_id": "",
-  "type": "ionic1"
+  "app_id": "c0d9d176",
+  "type": "ionic1",
+  "watchPatterns": [
+    "scss/**/*"
+  ]
 }

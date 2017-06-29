@@ -1,0 +1,68 @@
+<ion-view view-title="Timbreo Merlo" ng-controller="TimbreoController">
+    <div class="bar bar-header bar-energized">
+        <h1 class="title">Timbreo Merlo</h1>
+    </div>
+    <ion-content class="has-header">
+        <div class="card" ng-repeat="(numero, pregunta) in preguntas">
+            <div class="item item-divider item-text-wrap">{{numero}}) {{pregunta.texto}}</div>
+            <div class="item item-text-wrap" ng-show="pregunta.tipo == 'simple.estado'">
+                <div class="button-bar last">
+                    <a class="button" ng-click="seleccionar(numero, value)" ng-repeat="(value, texto) in pregunta.opciones" ng-class="formulario.respuestas[numero] == value ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
+                </div> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider item-text-wrap">11) Si las elecciones fueran hoy, ¿a los candidatos de quién votarías?</div>
+            <div class="item item-text-wrap">
+                <div class="button-bar">
+                    <a class="button" ng-click="seleccionar(11, 'Cambiemos');" ng-class="formulario.respuestas[11] == 'Cambiemos' ? 'button-dark' : 'button-outline button-stable'">de María Eugenia Vidal</a>
+                </div> 
+                <div class="button-bar">
+                    <a class="button" ng-click="seleccionar(11, 'Union Ciudadana');" ng-class="formulario.respuestas[11] == 'Union Ciudadana' ? 'button-dark' : 'button-outline button-stable'">de Cristina y Menendez</a>
+                </div> 
+                <div class="button-bar">
+                    <a class="button" ng-click="seleccionar(11, 'Cumplir');" ng-class="formulario.respuestas[11] == 'Cumplir' ? 'button-dark' : 'button-outline button-stable'">de Randazzo y Othacehe</a>
+                </div> 
+                <div class="button-bar">
+                    <a class="button" ng-click="seleccionar(11, 'Frente Renovador');" ng-class="formulario.respuestas[11] == 'Frente Renovador' ? 'button-dark' : 'button-outline button-stable'">de Massa</a>
+                </div> 
+                <div class="button-bar last">
+                    <a class="button" ng-click="seleccionar(11, 'Otro');" ng-class="formulario.respuestas[11] == 'Otro' ? 'button-dark' : 'button-outline button-stable'">de Otro</a>
+                    <a class="button" ng-click="seleccionar(11, 'NS/NC');" ng-class="formulario.respuestas[11] == 'NS/NC' ? 'button-dark' : 'button-outline button-stable'">NS/NC</a>
+                </div>  
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider item-text-wrap">Edad</div>
+            <div class="item item-text-wrap">
+                <div class="button-bar last">
+                    <a class="button" ng-click="seleccionar('edad', '18-30')" ng-class="formulario.respuestas.edad == '18-30' ? 'button-dark' : 'button-outline button-stable'">18-30</a>
+                    <a class="button" ng-click="seleccionar('edad', '31-49')" ng-class="formulario.respuestas.edad == '31-49' ? 'button-dark' : 'button-outline button-stable'">31-49</a>
+                    <a class="button" ng-click="seleccionar('edad', '+50')" ng-class="formulario.respuestas.edad == '+50' ? 'button-dark' : 'button-outline button-stable'">+50</a>
+                </div> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-divider item-text-wrap">Contacto</div>
+            <div class="item item-text-wrap">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Teléfono</span>
+                        <input type="number" ng-model="formulario.respuestas.telefono" placeholder="Teléfono">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Nombre</span>
+                        <input type="text" ng-model="formulario.respuestas.nombre" placeholder="Nombre">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="email" ng-model="formulario.respuestas.email" placeholder="Email">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-balanced" ng-click="guardar()">Guardar</button>
+        </div>
+    </ion-content>
+</ion-view>

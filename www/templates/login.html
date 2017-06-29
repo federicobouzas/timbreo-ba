@@ -1,0 +1,19 @@
+<ion-view view-title="Timbreo Merlo" ng-controller="LoginController">
+    <div class="bar bar-header bar-energized">
+        <h1 class="title">Timbreo</h1>
+    </div>
+    <ion-content class="has-header">
+        <form ng-submit="login()">
+            <div class="item item-divider">
+                Para comenzar ingresá tu información.
+            </div>
+            <div class="list list-inset">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Indentificación</span>
+                    <input type="text" placeholder="Nombre/DNI/Email" ng-model="user.identificacion">
+                </label>
+                <input type="submit" class="button button-block button-balanced" value="Ingresar" />
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
