@@ -6,8 +6,8 @@
 angular.module('timbreo', ['ionic', 'ngCordova'])
 
         .run(function ($ionicPlatform, $rootScope) {
-            //$rootScope.remoteURL = 'http://eideoos.com:5984/timbreo-merlo';
-            $rootScope.remoteURL = ' http://secdes.sytes.net:5984/timbreo-merlo';
+            $rootScope.remoteURL = 'http://eideoos.com:5984/timbreo-merlo';
+            //$rootScope.remoteURL = ' http://secdes.sytes.net:5984/timbreo-merlo';
             $ionicPlatform.ready(function () {
                 if (window.cordova && window.cordova.plugins.Keyboard) {
                     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -41,7 +41,7 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
         .factory('PouchDB', function () {
             return PouchDB;
         })
-        
+
         .controller('LoginController', function ($ionicPopup, $rootScope, $scope, $state, PouchDB) {
             var dbLocal = new PouchDB('timbreo-merlo');
             dbLocal.destroy();
@@ -61,6 +61,11 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
                 }
                 $state.go("timbreo");
             };
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("ok GEO");
+            }, function (error) {
+                console.log('code: ' + error.code + '\nmessage: ' + error.message + '\n');
+            });
         })
 
         .controller('TimbreoController', function ($ionicScrollDelegate, $rootScope, $scope, PouchDB, $ionicPopup, $timeout, $state) {
