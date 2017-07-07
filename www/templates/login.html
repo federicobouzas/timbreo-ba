@@ -12,7 +12,7 @@
                     <span class="input-label">Indentificación</span>
                     <input type="text" placeholder="Nombre/DNI/Email" ng-model="user.identificacion">
                 </label>
-                <div class="item">
+                <div class="item" ng-hide="partidoAutomatico">
                     <div class="button-bar last">
                         <span class="button" ng-click="seleccionarPartido('merlo')" ng-class="partido == 'merlo' ? 'button-dark' : 'button-outline button-stable'">Merlo</span>
                         <span class="button" ng-click="seleccionarPartido('campana')" ng-class="partido == 'campana' ? 'button-dark' : 'button-outline button-stable'">Campana</span>

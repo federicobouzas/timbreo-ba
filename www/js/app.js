@@ -1,6 +1,8 @@
 angular.module('timbreo', ['ionic', 'ngCordova'])
 
-        .run(function ($ionicPlatform) {
+        .run(function ($ionicPlatform, $rootScope) {
+            $rootScope.remoteURL = "https://couchdb.timbrea.me/";
+            $rootScope.partidos = ["merlo", "campana"];
             $ionicPlatform.ready(function () {
                 if (window.cordova && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -30,9 +32,9 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
         })
 
         .controller('LoginController', function ($ionicPopup, $rootScope, $scope, $state, PouchDB) {
-            $scope.partidos = ["merlo", "campana"];
             $rootScope.user = {};
             $rootScope.partido = "";
+            $scope.partidoAutomatico = false;
             $scope.login = function () {
                 var errores = [];
                 if (!$rootScope.user.identificacion || $rootScope.user.identificacion == "") {
@@ -68,6 +70,7 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
                             if (results[i].types[0] == "administrative_area_level_2") {
                                 var partido = results[i].address_components[0].long_name.toLowerCase();
                                 if ($scope.partidos.indexOf(partido) !== -1) {
+                                    $scope.partidoAutomatico = true;
                                     $rootScope.partido = partido;
                                     $rootScope.$apply();
                                 }
@@ -84,7 +87,7 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
         .controller('TimbreoController', function ($ionicScrollDelegate, $rootScope, $scope, PouchDB,
                 $ionicPopup, $timeout, $state, PreguntasMerlo, PreguntasCampana) {
             var dbLocal = new PouchDB('timbreo-' + $rootScope.partido);
-            PouchDB.replicate(dbLocal, 'https://couchdb.timbrea.me/timbreo-' + $rootScope.partido, {live: true, retry: true});
+            PouchDB.replicate(dbLocal, $rootScope.remoteURL + 'timbreo-' + $rootScope.partido, {live: true, retry: true});
             $scope.preguntas = $rootScope.partido == "merlo" ? PreguntasMerlo : PreguntasCampana;
             var resetForm = function () {
                 $scope.formulario = {user: $rootScope.user, position: {}, respuestas: {}};
@@ -128,136 +131,4 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
                 resetForm();
             };
             resetForm();
-        })
-
-        .factory('PreguntasMerlo', function () {
-            return {
-                1: {
-                    tipo: 'simple.estado',
-                    texto: '¿Conoce por los medios a la Gobernadora María Eugenia Vidal?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                2: {
-                    tipo: 'simple.estado',
-                    texto: '¿Qué opinión tiene de ella?',
-                    opciones: [
-                        {"B": "Buena", "R": "Regular", "M": "Mala"}
-                    ]
-                },
-                3: {
-                    tipo: 'simple.estado',
-                    texto: '¿Confía en la gestión de la Gobernadora a lo largo de estos años que le quedan de gestión?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                4: {
-                    tipo: 'simple.estado',
-                    texto: 'Independientemente de la opinión de la Gobernadora, ¿confía en el Gobierno Nacional y en su gestión en general?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                5: {
-                    tipo: 'simple.estado',
-                    texto: '¿Cómo es para usted la gestión del actual Intendente?',
-                    opciones: [
-                        {"B": "Buena", "R": "Regular", "M": "Mala"}
-                    ]
-                },
-                6: {
-                    tipo: 'simple.estado',
-                    texto: '¿Nota que hay mayores obras en el municipio desde el cambio de Gobierno Provincial?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                7: {
-                    tipo: 'simple.estado',
-                    texto: '¿Sabe que este año hay elecciones?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                8: {
-                    tipo: 'simple.estado',
-                    texto: '¿Sabe qué es lo que se elige en su distrito?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                9: {
-                    tipo: 'simple.estado',
-                    texto: '¿Y en la Provincia?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                10: {
-                    tipo: 'simple.estado',
-                    texto: '¿Y a nivel Nacional?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                },
-                11: {
-                    tipo: 'simple.estado',
-                    texto: 'Si las elecciones fueran hoy, ¿a los candidatos de quién votarías?',
-                    opciones: [
-                        {"Cambiemos": "de María Eugenia Vidal"},
-                        {"Union Ciudadana": "de Cristina y Menendez"},
-                        {"Cumplir": "de Randazzo y Othacehe"},
-                        {"Frente Renovador": "de Massa"},
-                        {"Otro": "de Otro", "NS/NC": "NS/NC"}
-                    ]
-                }
-            };
-        })
-
-        .factory('PreguntasCampana', function () {
-            return {
-                1: {
-                    tipo: 'simple.estado',
-                    texto: '¿Cómo evaluás hasta el momento la gestión del Intendente Sebastián Abella?',
-                    opciones: [
-                        {"B": "Buena", "R": "Regular", "M": "Mala"}
-                    ]
-                },
-                2: {
-                    tipo: 'simple.estado',
-                    texto: '¿Cuál dirías que es la principal problemática del Municipio?',
-                    opciones: [
-                        {'Inflacion': 'Inflación', 'Seguridad': 'Seguridad'},
-                        {'Corrupcion': 'Corrupción', 'Educacion': 'Educación'},
-                        {'Empleo': 'Empleo', 'Pobreza': 'Pobreza', 'Salud': 'Salud'}
-                    ]
-                },
-                3: {
-                    tipo: 'simple.estado',
-                    texto: 'Si las elecciones fueran hoy, ¿a los candidatos de quién votarías?',
-                    opciones: [
-                        {"Cambiemos": "de María Eugenia Vidal y Sergio Roses"},
-                        {"Union Ciudadana": "de Cristina y Ruben Romano"},
-                        {"Cumplir": "de Randazzo y Raul 'Ruli' Galarza"},
-                        {"Frente Renovador": "de Massa y Juan Gione"},
-                        {"Otro": "de Otro", "NS/NC": "NS/NC"}
-                    ]
-                },
-                4: {
-                    tipo: 'simple.estado',
-                    texto: '¿Qué imagen tenés de Sebastiá Abella?',
-                    opciones: [
-                        {"B": "Buena", "R": "Regular", "M": "Mala"}
-                    ]
-                },
-                5: {
-                    tipo: 'simple.estado',
-                    texto: '¿Conocés por los medios a Sergio Roses?',
-                    opciones: [
-                        {"Si": "Si", "No": "No"}
-                    ]
-                }
-            };
         });
