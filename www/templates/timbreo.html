@@ -6,30 +6,9 @@
         <div class="card" ng-repeat="(numero, pregunta) in preguntas">
             <div class="item item-divider item-text-wrap">{{numero}}) {{pregunta.texto}}</div>
             <div class="item item-text-wrap" ng-show="pregunta.tipo == 'simple.estado'">
-                <div class="button-bar last">
-                    <a class="button" ng-click="seleccionar(numero, value)" ng-repeat="(value, texto) in pregunta.opciones" ng-class="formulario.respuestas[numero] == value ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
+                <div class="button-bar last" ng-repeat="grupo in pregunta.opciones">
+                    <a class="button" ng-click="seleccionar(numero, value)" ng-repeat="(value, texto) in grupo" ng-class="formulario.respuestas[numero] == value ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
                 </div> 
-            </div>
-        </div>
-        <div class="card">
-            <div class="item item-divider item-text-wrap">11) Si las elecciones fueran hoy, ¿a los candidatos de quién votarías?</div>
-            <div class="item item-text-wrap">
-                <div class="button-bar">
-                    <a class="button" ng-click="seleccionar(11, 'Cambiemos');" ng-class="formulario.respuestas[11] == 'Cambiemos' ? 'button-dark' : 'button-outline button-stable'">de María Eugenia Vidal</a>
-                </div> 
-                <div class="button-bar">
-                    <a class="button" ng-click="seleccionar(11, 'Union Ciudadana');" ng-class="formulario.respuestas[11] == 'Union Ciudadana' ? 'button-dark' : 'button-outline button-stable'">de Cristina y Menendez</a>
-                </div> 
-                <div class="button-bar">
-                    <a class="button" ng-click="seleccionar(11, 'Cumplir');" ng-class="formulario.respuestas[11] == 'Cumplir' ? 'button-dark' : 'button-outline button-stable'">de Randazzo y Othacehe</a>
-                </div> 
-                <div class="button-bar">
-                    <a class="button" ng-click="seleccionar(11, 'Frente Renovador');" ng-class="formulario.respuestas[11] == 'Frente Renovador' ? 'button-dark' : 'button-outline button-stable'">de Massa</a>
-                </div> 
-                <div class="button-bar last">
-                    <a class="button" ng-click="seleccionar(11, 'Otro');" ng-class="formulario.respuestas[11] == 'Otro' ? 'button-dark' : 'button-outline button-stable'">de Otro</a>
-                    <a class="button" ng-click="seleccionar(11, 'NS/NC');" ng-class="formulario.respuestas[11] == 'NS/NC' ? 'button-dark' : 'button-outline button-stable'">NS/NC</a>
-                </div>  
             </div>
         </div>
         <div class="card">
