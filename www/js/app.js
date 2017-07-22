@@ -95,9 +95,15 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
             $scope.seleccionar = function (numero, valor) {
                 $scope.formulario.respuestas[numero] = valor;
             };
-            $scope.seleccionarMultiple = function (numero, seccion, valor) {
-                $scope.formulario.respuestas[numero] = $scope.formulario.respuestas[numero] || {};
-                $scope.formulario.respuestas[numero][seccion] = valor;
+            $scope.seleccionarMultiple = function (numero, valor) {
+                var max = $scope.preguntas[numero].max || 1;
+                $scope.formulario.respuestas[numero] = $scope.formulario.respuestas[numero] || [];
+                var index = $scope.formulario.respuestas[numero].indexOf(valor);
+                if (index !== -1) {
+                    $scope.formulario.respuestas[numero].splice(index, 1);
+                } else if ($scope.formulario.respuestas[numero].length < max) {
+                    $scope.formulario.respuestas[numero].push(valor);
+                }
             };
             $scope.exit = function () {
                 $rootScope.user = {};

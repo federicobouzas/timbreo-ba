@@ -10,14 +10,20 @@
                     <a class="button" ng-click="seleccionar(numero, value)" ng-repeat="(value, texto) in grupo" ng-class="formulario.respuestas[numero] == value ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
                 </div> 
             </div>
+            <div class="item item-text-wrap" ng-show="pregunta.tipo == 'multiple.estado'">
+                <div class="button-bar last" ng-repeat="grupo in pregunta.opciones">
+                    <a class="button" ng-click="seleccionarMultiple(numero, value)" ng-repeat="(value, texto) in grupo" ng-class="formulario.respuestas[numero] !== undefined && formulario.respuestas[numero].indexOf(value) !== -1 ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
+                </div> 
+            </div>
         </div>
         <div class="card">
             <div class="item item-divider item-text-wrap">Edad</div>
             <div class="item item-text-wrap">
                 <div class="button-bar last">
-                    <a class="button" ng-click="seleccionar('edad', '18-30')" ng-class="formulario.respuestas.edad == '18-30' ? 'button-dark' : 'button-outline button-stable'">18-30</a>
-                    <a class="button" ng-click="seleccionar('edad', '31-49')" ng-class="formulario.respuestas.edad == '31-49' ? 'button-dark' : 'button-outline button-stable'">31-49</a>
-                    <a class="button" ng-click="seleccionar('edad', '+50')" ng-class="formulario.respuestas.edad == '+50' ? 'button-dark' : 'button-outline button-stable'">+50</a>
+                    <a class="button" ng-click="seleccionar('edad', '16-25')" ng-class="formulario.respuestas.edad == '16-25' ? 'button-dark' : 'button-outline button-stable'">16-25</a>
+                    <a class="button" ng-click="seleccionar('edad', '26-39')" ng-class="formulario.respuestas.edad == '26-39' ? 'button-dark' : 'button-outline button-stable'">26-39</a>
+                    <a class="button" ng-click="seleccionar('edad', '40-59')" ng-class="formulario.respuestas.edad == '40-59' ? 'button-dark' : 'button-outline button-stable'">40-59</a>
+                    <a class="button" ng-click="seleccionar('edad', '+60')" ng-class="formulario.respuestas.edad == '+60' ? 'button-dark' : 'button-outline button-stable'">+60</a>
                 </div> 
             </div>
         </div>
@@ -26,12 +32,12 @@
             <div class="item item-text-wrap">
                 <div class="list">
                     <label class="item item-input item-floating-label">
-                        <span class="input-label">Teléfono</span>
-                        <input type="number" ng-model="formulario.respuestas.telefono" placeholder="Teléfono">
-                    </label>
-                    <label class="item item-input item-floating-label">
                         <span class="input-label">Nombre</span>
                         <input type="text" ng-model="formulario.respuestas.nombre" placeholder="Nombre">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Teléfono</span>
+                        <input type="number" ng-model="formulario.respuestas.telefono" placeholder="Teléfono">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
