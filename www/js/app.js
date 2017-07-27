@@ -87,7 +87,7 @@ angular.module('timbreo', ['ionic', 'ngCordova'])
         .controller('TimbreoController', function ($ionicScrollDelegate, $rootScope, $scope, PouchDB,
                 $ionicPopup, $timeout, $state, PreguntasMerlo, PreguntasCampana) {
             var dbLocal = new PouchDB('timbreo-' + $rootScope.partido);
-            PouchDB.replicate(dbLocal, $rootScope.remoteURL + 'timbreo-' + $rootScope.partido, {live: true, retry: true});
+            PouchDB.replicate(dbLocal, $rootScope.remoteURL + 'timbreo-' + $rootScope.partido + '-dev', {live: true, retry: true});
             $scope.preguntas = $rootScope.partido == "merlo" ? PreguntasMerlo : PreguntasCampana;
             var resetForm = function () {
                 $scope.formulario = {user: $rootScope.user, position: {}, respuestas: {}};

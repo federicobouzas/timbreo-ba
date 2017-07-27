@@ -1,6 +1,13 @@
 angular.module('timbreo')
         .factory('PreguntasCampana', function () {
             return {
+                0: {
+                    tipo: 'simple.estado',
+                    texto: '¿Atendió?',
+                    opciones: [
+                        {"Si": "Si", "No": "No"}
+                    ]
+                },
                 1: {
                     tipo: 'simple.estado',
                     texto: '¿Cómo evaluás hasta el momento la gestión del Intendente Sebastián Abella?',
