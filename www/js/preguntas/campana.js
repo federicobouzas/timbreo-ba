@@ -17,13 +17,19 @@ angular.module('timbreo')
                 },
                 3: {
                     tipo: 'simple.estado',
-                    texto: '¿Con qué partido o frente político se identifica?',
+                    texto: 'Si las elecciones fueran hoy, ¿a los candidatos de quién votarías para Consejal?',
                     opciones: [
-                        {"Cambiemos": "Cambiemos"},
-                        {"FPV": "Unidad Ciudadana/FPV"},
-                        {"Frente Renovador": "Frente Renovador"},
-                        {"Izquierda": "Izquierda"},
-                        {"Otro": "de Otro", "NS/NC": "NS/NC"}
+                        {"Cambiemos": "María Eugenia, Abella y Sergio Roses"},
+                        {"Unidad Ciudadana (Ruben Romano)": "Cristina y Ruben Romano"},
+                        {"Unidad Ciudadana (Alejo Sarna)": "Cristina y Alejo Sarna"},
+                        {"Cumplir": "Randazzo y Raul 'Ruli' Galarza"},
+                        {"1 País": "Massa y Juan Gione"},
+                        {"Frente Izquierda": "Guillermo Bentacur (Frente Izquierda)"},
+                        {"UV": "Axel Cantlon (UV)"},
+                        {"VAMOS": "Lautaro Rios (VAMOS)"},
+                        {"Frente CREO": "Carlos Fornarini (Frente CREO)"},
+                        {"Frente Socialista y Popular": "Martín Nobúa (Frente Socialista y Popular)"},
+                        {"Otro": "Otro", "NS/NC": "NS/NC"}
                     ]
                 },
                 4: {
@@ -33,11 +39,11 @@ angular.module('timbreo')
                     opciones: [
                         {'Inseguridad': 'Inseguridad', 'Desempleo': 'Desempleo'},
                         {'Luminarias': 'Luminarias', 'Cloacas': 'Cloacas'},
-                        {'Falta de vivienda': 'Falta de vivienda', 'Educación': 'Educación'},
+                        {'Falta de vivienda': 'Falta de Vivienda', 'Educación': 'Educación'},
                         {'Servicio de Absa': 'Servicio de Absa', 'Contaminación': 'Contaminación'},
-                        {'Mal estado del barrio': 'Mal estado del barrio'},
-                        {'Tránsito/transporte': 'Tránsito/transporte'},
-                        {'Salud': 'Salud (estado de los Hospitales)'}
+                        {'Espacio Público': 'Espacio Público', 'Higiene': 'Higiene'},
+                        {'Tránsito/transporte': 'Tránsito/Transporte', 'Salud': 'Salud/Hospitales'},
+                        {'Mal estado del barrio': 'Mal Estado del Barrio'}
                     ]
                 },
                 5: {

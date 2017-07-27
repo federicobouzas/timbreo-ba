@@ -6,12 +6,12 @@
         <div class="card" ng-repeat="(numero, pregunta) in preguntas">
             <div class="item item-divider item-text-wrap">{{numero}}) {{pregunta.texto}}</div>
             <div class="item item-text-wrap" ng-show="pregunta.tipo == 'simple.estado'">
-                <div class="button-bar last" ng-repeat="grupo in pregunta.opciones">
-                    <a class="button" ng-click="seleccionar(numero, value)" ng-repeat="(value, texto) in grupo" ng-class="formulario.respuestas[numero] == value ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
+                <div class="button-bar" ng-class="(key + 1) == pregunta.opciones.length ? 'last' : ''" ng-repeat="(key, grupo) in pregunta.opciones">
+                    <a class="button item-text-wrap" ng-click="seleccionar(numero, value)" ng-repeat="(value, texto) in grupo" ng-class="formulario.respuestas[numero] == value ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
                 </div> 
             </div>
             <div class="item item-text-wrap" ng-show="pregunta.tipo == 'multiple.estado'">
-                <div class="button-bar last" ng-repeat="grupo in pregunta.opciones">
+                <div class="button-bar" ng-class="(key + 1) == pregunta.opciones.length ? 'last' : ''" ng-repeat="(key, grupo) in pregunta.opciones">
                     <a class="button" ng-click="seleccionarMultiple(numero, value)" ng-repeat="(value, texto) in grupo" ng-class="formulario.respuestas[numero] !== undefined && formulario.respuestas[numero].indexOf(value) !== -1 ? 'button-dark' : 'button-outline button-stable'">{{texto}}</a>
                 </div> 
             </div>
